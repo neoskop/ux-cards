@@ -2,6 +2,7 @@
   width: 100%;
   aspect-ratio: 5 / 6;
   position: relative;
+  z-index: 10;
 
   @include breakpoint(s) {
     aspect-ratio: 5 / 3;
