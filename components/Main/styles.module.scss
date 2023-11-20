@@ -1,13 +1,25 @@
 .main {
   background-color: color(cat-laws);
-  min-height: 100svh;
+  height: 100svh;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: dm(2);
+  overflow: hidden;
 }
 
 .inner {
   width: 100%;
   max-width: 560px;
+}
+
+.branding {
+  position: absolute;
+  bottom: dm(6);
+  opacity: 0.3;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.5;
+  }
 }
