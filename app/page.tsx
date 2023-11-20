@@ -12,16 +12,23 @@ async function getCategories() {
   return directus.request(readItems('Lernfelder'))
 }
 
+export type Card = {
+  Titel: string
+  Kategorie: string
+  Beschreibung: string
+  Icon: string
+}
+
 export default async function Home() {
-  const cards = await getCards()
-  const categories = await getCategories()
+  const cards: Record<string, any>[] = await getCards()
+  const categories: Record<string, any>[] = await getCategories()
 
   console.log(categories)
 
   const findCategory = (catId: number) => {
-    const categoryName: string = categories.find(cat => cat.id === catId)
+    const category: any = categories.find(cat => cat.id === catId)
 
-    return categoryName
+    return category
   }
 
   return (
