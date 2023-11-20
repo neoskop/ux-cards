@@ -12,14 +12,9 @@
 }
 
 .backCard {
-  z-index: 0;
-}
-
-.activeCard {
-  z-index: 1;
+  pointer-events: none;
 }
 
 .frontCard {
   pointer-events: none;
-  z-index: 2;
 }
