@@ -1,6 +1,6 @@
 .header {
   position: fixed;
-  padding: dm(4);
+  padding: clamp(dm(2), 5vw, dm(4));
   top: 0;
   left: 0;
   width: 100%;

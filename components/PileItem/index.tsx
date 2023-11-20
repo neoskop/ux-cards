@@ -55,7 +55,7 @@ const PileItem = ({
 
   return (
     <motion.div
-      className={clsx(styles.pileItem, styles[state])}
+      className={clsx(styles['pile-item'], styles[state])}
       style={{
         x,
         rotate,
