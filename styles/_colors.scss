@@ -1,0 +1,30 @@
+$black: #000000;
+$white: #ffffff;
+
+$purple: #6f4dd6;
+$purple-light: #e9e5f5;
+
+$orange: #f57d0d;
+$orange-light: #ffebd8;
+
+$green: #06bc70;
+$green-light: #d7ffee;
+
+$colors: (
+  'text': $black,
+  'background': $white,
+  'card-bg': $white,
+  'action': $purple,
+  'cat-laws': $purple,
+  'cat-laws-bg': $purple-light,
+  'cat-human': $orange,
+  'cat-human-bg': $orange-light,
+  'cat-quotes': $green,
+  'cat-quptes-bg': $green-light
+);
+
+@function color($color, $opacity: 1) {
+  $color: rgba(map-get($colors, $color), $opacity);
+
+  @return $color;
+}

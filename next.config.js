@@ -1,22 +1,33 @@
-const path = require("path");
+const path = require('path')
 
 const nextConfig = {
+  images: {
+    dangerouslyAllowSVG: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'directus.heartworking.dev',
+        port: '',
+        pathname: '/assets/**'
+      }
+    ]
+  },
   sassOptions: {
     prependData: `@import "${path.resolve(
       __dirname,
-      "styles/application.scss"
-    )}";`,
+      'styles/application.scss'
+    )}";`
   },
   webpack(config) {
     const rules = config.module.rules
-      .find((rule) => typeof rule.oneOf === "object")
-      .oneOf.filter((rule) => Array.isArray(rule.use));
+      .find(rule => typeof rule.oneOf === 'object')
+      .oneOf.filter(rule => Array.isArray(rule.use))
 
-    rules.forEach((rule) => {
-      rule.use.forEach((moduleLoader) => {
+    rules.forEach(rule => {
+      rule.use.forEach(moduleLoader => {
         if (
-          moduleLoader.loader?.includes("css-loader") &&
-          !moduleLoader.loader?.includes("postcss-loader")
+          moduleLoader.loader?.includes('css-loader') &&
+          !moduleLoader.loader?.includes('postcss-loader')
         ) {
           if (moduleLoader.options.modules) {
             moduleLoader.options.modules.getLocalIdent = (
@@ -29,31 +40,31 @@ const nextConfig = {
                   context.rootContext,
                   path.dirname(context.resourcePath)
                 )
-                .split("/")
+                .split('/')
                 .slice(-1)
-                .join("-");
+                .join('-')
 
               const rootClass =
                 root.charAt(0).toLowerCase() +
                 root
                   .slice(1)
-                  .replace(/([A-Z])/g, "-$1")
+                  .replace(/([A-Z])/g, '-$1')
                   .trim()
-                  .toLowerCase();
+                  .toLowerCase()
 
               if (rootClass !== exportName) {
-                return `${rootClass}»${exportName}`;
+                return `${rootClass}»${exportName}`
               } else {
-                return `${exportName}`;
+                return `${exportName}`
               }
-            };
+            }
           }
         }
-      });
-    });
+      })
+    })
 
-    return config;
-  },
-};
+    return config
+  }
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig
