@@ -37,7 +37,7 @@ const PileItem = ({
     },
     frontCard: {
       initial: { scale: 1, y: 0, opacity: 1 },
-      animate: { scale: 1.5, y: '100vh', opacity: 0.5 }
+      animate: { scale: 1.2, y: '100vh', opacity: 0 }
     }
   }
 
@@ -71,7 +71,7 @@ const PileItem = ({
       animate="animate"
       exit="exit"
       custom={exitX}
-      transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+      transition={{ type: 'spring', stiffness: 200, damping: 22 }}
     >
       <motion.div className={styles.inner} style={{ scale }}>
         {children}
