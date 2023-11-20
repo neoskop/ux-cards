@@ -25,7 +25,8 @@ const PileItem = ({
   const variants = {
     backCard: {
       initial: { scale: 0, y: 100, opacity: 0 },
-      animate: { scale: 0.75, y: -80, opacity: 0.5 }
+      animate: { scale: 0.75, y: -80, opacity: 0.5 },
+      exit: { scale: 0.5, y: -160, opacity: 0 }
     },
     activeCard: {
       animate: { scale: 1, y: 0, opacity: 1 },
