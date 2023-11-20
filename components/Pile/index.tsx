@@ -23,7 +23,7 @@ const Pile = ({ items }: PileProps) => {
     <motion.div className={styles.pile}>
       <AnimatePresence initial={false}>
         <PileItem
-          key={index + 1}
+          key={index === items.length - 1 ? 0 : index + 1}
           frontCard={false}
           index={index}
           setIndex={changeIndex}
