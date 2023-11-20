@@ -15,11 +15,21 @@
 
 .branding {
   position: absolute;
-  bottom: dm(6);
+  bottom: clamp(dm(3), 5vh, dm(6));
   opacity: 0.3;
   transition: opacity 0.3s;
 
   &:hover {
     opacity: 0.5;
+  }
+
+  img {
+    width: 110px;
+    height: 30px;
+
+    @include breakpoint(s) {
+      width: 132px;
+      height: 36px;
+    }
   }
 }

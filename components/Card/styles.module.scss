@@ -59,7 +59,7 @@
 
 .visual {
   width: 100%;
-  height: 28%;
+  padding: dm(4);
   position: relative;
   flex-shrink: 0;
   display: flex;
@@ -71,6 +71,7 @@
   @include breakpoint(s) {
     width: 32%;
     height: 100%;
+    padding: 0;
   }
 
   &:after {
