@@ -10,3 +10,16 @@
   width: 100%;
   height: 100%;
 }
+
+.backCard {
+  z-index: 0;
+}
+
+.activeCard {
+  z-index: 1;
+}
+
+.frontCard {
+  pointer-events: none;
+  z-index: 2;
+}

@@ -3,3 +3,38 @@
   aspect-ratio: 5 / 3;
   position: relative;
 }
+
+.action {
+  all: unset;
+  width: dm(7);
+  height: dm(7);
+  background-color: rgba($black, 0.2);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(0, -50%);
+  transition:
+    background-color 0.3s,
+    opacity 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba($black, 0.3);
+  }
+
+  &:disabled {
+    opacity: 0;
+    cursor: default;
+  }
+}
+
+.prev {
+  left: dm(-16);
+}
+
+.next {
+  right: dm(-16);
+}
