@@ -1,0 +1,54 @@
+@use 'sass:list';
+@use 'sass:map';
+
+$media-direction: min;
+
+$mobile-width: 440px;
+$tablet-portrait-width: 768px;
+$tablet-landscape-width: 1024px;
+$notebook-width: 1280px;
+$desktop-width: 1680px;
+
+$breakpoints: (
+  'xs': $mobile-width,
+  's': $tablet-portrait-width,
+  'm': $tablet-landscape-width,
+  'l': $notebook-width,
+  'xl': $desktop-width
+);
+
+$range-breakpoints: ('s', 'm', 'l', 'xl', 'xl');
+
+// breakpoints
+
+@mixin breakpoint($breakpoint, $direction: $media-direction) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (#{$direction}-width: #{map-get($breakpoints, $breakpoint)}) {
+      @content;
+    }
+  } @else if unitless($breakpoint) {
+    $breakpoint: $breakpoint + 0;
+
+    @media (#{$direction}-width: $breakpoint) {
+      @content;
+    }
+  }
+}
+
+// responsive properties
+
+@mixin responsive-properties($properties) {
+  @each $property in $properties {
+    #{$property}: var(--#{$property}-base);
+  }
+
+  @each $breakpoint in $range-breakpoints {
+    @include breakpoint($breakpoint) {
+      @each $property in $properties {
+        &[data-breakpoints~='#{$property}:#{$breakpoint}'] {
+          #{$property}: var(--#{$property}-#{$breakpoint});
+        }
+      }
+    }
+  }
+}
