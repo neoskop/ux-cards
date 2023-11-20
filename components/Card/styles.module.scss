@@ -51,6 +51,8 @@
 .description {
   margin: 0;
   font: font(1.6, large, light);
+  hyphens: auto;
+  text-wrap: pretty;
 
   @include breakpoint(s) {
     font: font(1.7, large, light);
