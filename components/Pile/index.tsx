@@ -1,66 +1,91 @@
 'use client'
 
-import { AnimatePresence, motion, useDragControls } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowLeft, ArrowRight } from 'react-feather'
+import { useRef, useState } from 'react'
 
 import PileItem from '@/components/PileItem'
 import { PileProps } from './types'
 import clsx from 'clsx'
 import styles from './styles.module.scss'
-import { useState } from 'react'
+import { useKeyPress } from '@/hooks/useKeypress'
 
 const Pile = ({ items }: PileProps) => {
   const [index, setIndex] = useState(0)
+  const indexRef = useRef(0)
 
   const changeIndex = (newIndex: number) => {
     if (newIndex < items.length && newIndex > 0) {
       setIndex(newIndex)
+      indexRef.current = newIndex
     } else if (newIndex < 0) {
       setIndex(items.length - 1)
+      indexRef.current = items.length - 1
     } else {
       setIndex(0)
+      indexRef.current = 0
     }
   }
+
+  useKeyPress('ArrowDown', () => {
+    changeIndex(indexRef.current + 1)
+  })
+
+  useKeyPress('ArrowRight', () => {
+    changeIndex(indexRef.current + 1)
+  })
+
+  useKeyPress('ArrowUp', () => {
+    changeIndex(indexRef.current - 1)
+  })
+
+  useKeyPress('ArrowLeft', () => {
+    changeIndex(indexRef.current - 1)
+  })
 
   return (
     <motion.div className={styles.pile}>
       <button
         className={clsx(styles.action, styles.prev)}
-        onClick={() => changeIndex(index - 1)}
+        onClick={() => changeIndex(indexRef.current - 1)}
       >
         <ArrowLeft color="white" />
       </button>
       <button
         className={clsx(styles.action, styles.next)}
-        onClick={() => changeIndex(index + 1)}
+        onClick={() => changeIndex(indexRef.current + 1)}
       >
         <ArrowRight color="white" />
       </button>
       <AnimatePresence initial={false}>
         <PileItem
-          key={index === items.length - 1 ? 0 : index + 1}
+          key={indexRef.current === items.length - 1 ? 0 : indexRef.current + 1}
           state="backCard"
-          index={index}
+          index={indexRef.current}
           setIndex={changeIndex}
         >
-          {items[index === items.length - 1 ? 0 : index + 1]}
+          {items[index === items.length - 1 ? 0 : indexRef.current + 1]}
         </PileItem>
         <PileItem
-          key={index}
+          key={indexRef.current}
           state="activeCard"
-          index={index}
+          index={indexRef.current}
           setIndex={changeIndex}
           drag="y"
         >
           {items[index]}
         </PileItem>
         <PileItem
-          key={index === 0 ? items.length - 1 : index - 1}
+          key={indexRef.current === 0 ? items.length - 1 : indexRef.current - 1}
           state="frontCard"
-          index={index}
+          index={indexRef.current}
           setIndex={changeIndex}
         >
-          {items[index === 0 ? items.length - 1 : index - 1]}
+          {
+            items[
+              indexRef.current === 0 ? items.length - 1 : indexRef.current - 1
+            ]
+          }
         </PileItem>
       </AnimatePresence>
     </motion.div>
