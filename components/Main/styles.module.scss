@@ -4,17 +4,31 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: dm(2);
   overflow: hidden;
+}
+
+.pile-view {
+  width: 100%;
+  max-width: 560px;
+  padding: dm(2);
 }
 
 .inner {
   width: 100%;
-  max-width: 560px;
+}
+
+.overview-view {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 1024px;
+  overflow-y: scroll;
 }
 
 .branding {
-  position: absolute;
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0);
   bottom: clamp(dm(3), 5vh, dm(6));
   opacity: 0.3;
   transition: opacity 0.3s;

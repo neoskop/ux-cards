@@ -1,5 +1,6 @@
 import Card from '@/components/Card'
 import Main from '@/components/Main'
+import Overview from '@/components/Overview'
 import Pile from '@/components/Pile'
 import directus from '@/lib/directus'
 import { readItems } from '@directus/sdk'
@@ -31,20 +32,32 @@ export default async function Home() {
     return category
   }
 
+  const overviewItems = cards.map(card => (
+    <Card
+      key={card.Titel}
+      color={findCategory(card.Kategorie).Farbe}
+      title={card.Titel}
+      description={card.Beschreibung}
+      category={findCategory(card.Kategorie).Name}
+      visual={`${process.env.DIRECTUS_URL}/assets/${card.Icon}`}
+      compact
+    />
+  ))
+
+  const pileItems = cards.map(card => (
+    <Card
+      key={card.Titel}
+      color={findCategory(card.Kategorie).Farbe}
+      title={card.Titel}
+      description={card.Beschreibung}
+      category={findCategory(card.Kategorie).Name}
+      visual={`${process.env.DIRECTUS_URL}/assets/${card.Icon}`}
+    />
+  ))
+
   return (
-    <Main>
-      <Pile
-        items={cards.map(card => (
-          <Card
-            key={card.Titel}
-            color={findCategory(card.Kategorie).Farbe}
-            title={card.Titel}
-            description={card.Beschreibung}
-            category={findCategory(card.Kategorie).Name}
-            visual={`${process.env.DIRECTUS_URL}/assets/${card.Icon}`}
-          />
-        ))}
-      />
+    <Main overview={<Overview items={overviewItems} />}>
+      <Pile items={pileItems} />
     </Main>
   )
 }

@@ -1,0 +1,16 @@
+.overview {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: dm(1);
+  width: 100%;
+  padding: clamp(dm(10), 10vw, dm(20)) dm(2) dm(2) dm(2);
+
+  @include breakpoint(s) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include breakpoint(m) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: dm(1.5);
+  }
+}

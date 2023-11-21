@@ -4,4 +4,5 @@ export type CardProps = {
   category: string
   description: string
   visual?: string
+  compact?: boolean
 }
