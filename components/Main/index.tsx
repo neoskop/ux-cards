@@ -11,7 +11,7 @@ import styles from './styles.module.scss'
 import { useState } from 'react'
 
 const Main = ({ children, overview }: MainProps) => {
-  const [showOverview, setShowOverview] = useState(true)
+  const [showOverview, setShowOverview] = useState(false)
 
   const handleOverview = () => {
     setShowOverview(!showOverview)
