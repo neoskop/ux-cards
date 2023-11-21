@@ -13,8 +13,14 @@
 
 .backCard {
   pointer-events: none;
+  z-index: 1;
+}
+
+.activeCard {
+  z-index: 2;
 }
 
 .frontCard {
   pointer-events: none;
+  z-index: 3;
 }
