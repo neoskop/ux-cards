@@ -10,9 +10,9 @@ import clsx from 'clsx'
 import styles from './styles.module.scss'
 import { useKeyPress } from '@/hooks/useKeypress'
 
-const Pile = ({ items }: PileProps) => {
-  const [index, setIndex] = useState(0)
-  const indexRef = useRef(0)
+const Pile = ({ items, defaultIndex = 0 }: PileProps) => {
+  const [index, setIndex] = useState(defaultIndex)
+  const indexRef = useRef(defaultIndex)
 
   const changeIndex = (newIndex: number) => {
     if (newIndex < items.length && newIndex > 0) {

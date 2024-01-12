@@ -1,14 +1,11 @@
-import { Grid } from 'react-feather'
 import { HeaderProps } from './types'
 import styles from './styles.module.scss'
 
-const Header = ({ action }: HeaderProps) => {
+const Header = ({ children }: HeaderProps) => {
   return (
     <header className={styles.header}>
       <div className={styles.logo}>ux cards</div>
-      <button className={styles.overview} onClick={action}>
-        <Grid size={24} color="black" />
-      </button>
+      <div className={styles.actions}>{children}</div>
     </header>
   )
 }

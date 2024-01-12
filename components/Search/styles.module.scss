@@ -1,0 +1,51 @@
+.search {
+  position: relative;
+}
+
+.button {
+  position: relative;
+  transform: translateX(0);
+  transition: transform 0.3s;
+
+  .active & {
+    transform: translateX(-1rem);
+  }
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  z-index: -1;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s,
+    transform 0.3s,
+    visibility 0.3s;
+  transform-origin: right;
+  transform: scaleX(0);
+}
+
+.visible {
+  visibility: visible;
+  opacity: 0.5;
+  transform: scaleX(1);
+}
+
+.input {
+  all: unset;
+  width: dm(30);
+  background-color: $purple-dark;
+  color: $white;
+  border-radius: dm(1);
+  padding: dm(2) dm(2.5);
+  transform: translateY(-50%);
+
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-results-button,
+  &::-webkit-search-results-decoration {
+    display: none;
+  }
+}

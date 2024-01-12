@@ -5,6 +5,10 @@
   width: 100%;
   padding: clamp(dm(10), 10vw, dm(20)) dm(2) dm(2) dm(2);
 
+  &:hover > a > div {
+    opacity: 0.7;
+  }
+
   @include breakpoint(s) {
     grid-template-columns: repeat(3, 1fr);
   }

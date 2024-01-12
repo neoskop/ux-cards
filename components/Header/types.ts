@@ -1,3 +1,3 @@
 export type HeaderProps = {
-  action: () => void
+  children: React.ReactNode
 }
