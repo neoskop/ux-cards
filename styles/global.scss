@@ -7,6 +7,7 @@ body {
   font-family: 'Radikal', sans-serif;
   -webkit-font-smoothing: antialiased;
   scroll-behavior: smooth;
+  text-wrap: pretty;
 
   @include breakpoint(m) {
     overscroll-behavior: none;

@@ -11,6 +11,7 @@
 
 .compact {
   //animation: fadeIn 0.6s backwards;
+  cursor: pointer;
 
   @for $i from 1 through 50 {
     &:nth-child(#{$i}) {
@@ -89,7 +90,11 @@
   .compact & {
     font: font(1.6, small, bold);
     margin: 0;
+    display: -webkit-box;
     text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 
     @include breakpoint(s) {
       font: font(2, small, bold);
