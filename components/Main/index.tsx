@@ -50,6 +50,8 @@ const Main = ({ cards, categories, assetUrl }: MainProps) => {
         return true
       } else if (card.Beschreibung?.match(capitalizeFirstLetter(searchTerm))) {
         return true
+      } else if (card.Autor?.match(capitalizeFirstLetter(searchTerm))) {
+        return true
       } else {
         return false
       }
@@ -71,7 +73,7 @@ const Main = ({ cards, categories, assetUrl }: MainProps) => {
     <Card
       key={card.Titel}
       id={card.id}
-      color={findCategory(card.Kategorie).Farbe}
+      color={findCategory(card.Kategorie)?.Farbe}
       title={card.Titel}
       description={card.Beschreibung}
       category={findCategory(card.Kategorie).Name}
@@ -87,7 +89,7 @@ const Main = ({ cards, categories, assetUrl }: MainProps) => {
     <Card
       key={card.Titel}
       id={card.id}
-      color={findCategory(card.Kategorie).Farbe}
+      color={findCategory(card.Kategorie)?.Farbe}
       title={card.Titel}
       description={card.Beschreibung}
       category={findCategory(card.Kategorie).Name}

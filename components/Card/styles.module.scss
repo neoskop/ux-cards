@@ -89,6 +89,7 @@
   .compact & {
     font: font(1.6, small, bold);
     margin: 0;
+    text-overflow: ellipsis;
 
     @include breakpoint(s) {
       font: font(2, small, bold);

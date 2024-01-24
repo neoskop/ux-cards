@@ -30,21 +30,31 @@ const Card = ({
       <div className={styles.inner}>
         <div className={styles.content}>
           <h5 className={styles.category}>{category}</h5>
-          {title && <h2 className={styles.title}>{title}</h2>}
-          {template !== 'compact' && (
-            <p
-              className={
-                template === 'quote' ? styles.title : styles.description
-              }
-            >
-              {template === 'quote' ? `“${description}”` : description}
-            </p>
+          {template === 'default' && (
+            <>
+              {title && <h2 className={styles.title}>{title}</h2>}
+              <p className={styles.description}>{description}</p>
+            </>
           )}
-          {author && (
-            <div className={styles.author}>
-              {author}
-              {authorPosition && <>, {authorPosition}</>}
-            </div>
+          {template === 'quote' && (
+            <>
+              <p className={styles.title}>“{description}”</p>
+              {author && (
+                <div className={styles.author}>
+                  {author}
+                  {authorPosition && <>, {authorPosition}</>}
+                </div>
+              )}
+            </>
+          )}
+          {template === 'compact' && (
+            <>
+              {title ? (
+                <h2 className={styles.title}>{title}</h2>
+              ) : (
+                <h2 className={styles.title}>{description}</h2>
+              )}
+            </>
           )}
         </div>
         {template === 'default' && visual && (
