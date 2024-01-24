@@ -61,17 +61,18 @@ const Main = ({ cards, categories, assetUrl }: MainProps) => {
   }
 
   useEffect(() => {
-    filterCards(searchTerm)
+    console.log(showOverview)
+  }, [showOverview])
 
-    console.log(cards)
-    console.log(categories)
+  useEffect(() => {
+    filterCards(searchTerm)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm])
 
   const overviewItems = filteredCards.map((card, i) => (
     <Card
-      key={card.Titel}
+      key={`card-${card.id}`}
       id={card.id}
       color={findCategory(card.Kategorie)?.Farbe}
       title={card.Titel}
@@ -87,7 +88,7 @@ const Main = ({ cards, categories, assetUrl }: MainProps) => {
 
   const pileItems = cards.map((card, i) => (
     <Card
-      key={card.Titel}
+      key={`card-${card.id}`}
       id={card.id}
       color={findCategory(card.Kategorie)?.Farbe}
       title={card.Titel}

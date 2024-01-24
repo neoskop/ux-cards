@@ -1,13 +1,13 @@
 'use client'
 
 import { AnimatePresence, motion } from 'framer-motion'
+import { useRef, useState } from 'react'
 import { Search as SearchIcon, XCircle } from 'react-feather'
-import { useEffect, useRef, useState } from 'react'
 
-import { SearchProps } from './types'
-import clsx from 'clsx'
 import { fade } from '@/lib/animations/fade'
+import clsx from 'clsx'
 import styles from './styles.module.scss'
+import { SearchProps } from './types'
 
 const Search = ({ search }: SearchProps) => {
   const [value, setValue] = useState('')
@@ -20,16 +20,15 @@ const Search = ({ search }: SearchProps) => {
     setTimeout(() => inputRef.current && inputRef.current.focus(), 100)
   }
 
+  const handleValue = (e: any) => {
+    setValue(e.target.value)
+    search(e.target.value)
+  }
+
   const resetSearch = () => {
     setValue('')
     setInput(false)
   }
-
-  useEffect(() => {
-    search(value)
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value])
 
   return (
     <div className={clsx(styles.search, showInput && styles.active)}>
@@ -58,7 +57,7 @@ const Search = ({ search }: SearchProps) => {
           ref={inputRef}
           type="search"
           value={value}
-          onChange={e => setValue(e.target.value)}
+          onChange={handleValue}
           className={styles.input}
         />
       </div>
