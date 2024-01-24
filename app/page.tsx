@@ -1,4 +1,3 @@
-import Card from '@/components/Card'
 import Main from '@/components/Main'
 import directus from '@/lib/directus'
 import { readItems } from '@directus/sdk'
@@ -11,13 +10,23 @@ async function getCategories() {
   return directus.request(readItems('Lernfelder'))
 }
 
-export type CardKeys = 'Titel' | 'Kategorie' | 'Beschreibung' | 'Icon'
+export type CardKeys =
+  | 'Titel'
+  | 'Kategorie'
+  | 'Beschreibung'
+  | 'Icon'
+  | 'Autor'
+  | 'Autor_Position'
+  | 'id'
 
 export type CardType = {
-  Titel: string
   Kategorie: number
+  Titel?: string
   Beschreibung: string
-  Icon: string
+  Icon?: string
+  Autor?: string
+  Autor_Position?: string
+  id: number
 }
 
 export type CategoryType = {

@@ -1,10 +1,10 @@
-import { CSSProperties } from 'react'
-import { CardProps } from './types'
-import Image from 'next/image'
-import clsx from 'clsx'
 import { fade } from '@/lib/animations/fade'
+import clsx from 'clsx'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
+import { CSSProperties } from 'react'
 import styles from './styles.module.scss'
+import { CardProps } from './types'
 
 const Card = ({
   id,
@@ -13,15 +13,15 @@ const Card = ({
   category,
   description,
   visual,
+  author,
+  authorPosition,
   openCard,
-  compact = false
+  template = 'default'
 }: CardProps) => {
-  console.log(color)
-
   return (
     <motion.a
       key={title}
-      className={clsx(styles.card, compact && styles.compact)}
+      className={clsx(styles.card, styles[template])}
       style={{ '--cat-color': color } as CSSProperties}
       onClick={() => openCard && openCard(id)}
       layout
@@ -30,10 +30,24 @@ const Card = ({
       <div className={styles.inner}>
         <div className={styles.content}>
           <h5 className={styles.category}>{category}</h5>
-          <h2 className={styles.title}>{title}</h2>
-          {!compact && <p className={styles.description}>{description}</p>}
+          {title && <h2 className={styles.title}>{title}</h2>}
+          {template !== 'compact' && (
+            <p
+              className={
+                template === 'quote' ? styles.title : styles.description
+              }
+            >
+              {template === 'quote' ? `“${description}”` : description}
+            </p>
+          )}
+          {author && (
+            <div className={styles.author}>
+              {author}
+              {authorPosition && <>, {authorPosition}</>}
+            </div>
+          )}
         </div>
-        {!compact && visual && (
+        {template === 'default' && visual && (
           <div className={styles.visual}>
             <Image src={visual} alt={styles.title} width={64} height={64} />
           </div>

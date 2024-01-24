@@ -3,7 +3,6 @@
   width: 100%;
   height: 100%;
   display: flex;
-  cursor: pointer;
 
   &:hover {
     z-index: 1;
@@ -18,6 +17,10 @@
       animation-delay: 0.05s * $i;
     }
   }
+}
+
+.quote {
+  text-align: center;
 }
 
 .inner {
@@ -63,6 +66,7 @@
   flex-direction: column;
   color: color(text);
   height: 100%;
+  flex: 1;
 
   @include breakpoint(s) {
     justify-content: center;
@@ -108,6 +112,10 @@
     @include breakpoint(s) {
       font: font(1.2, small, regular);
     }
+  }
+
+  .quote & {
+    margin: 0 0 dm(2) 0;
   }
 }
 
@@ -160,4 +168,8 @@
       height: dm(8);
     }
   }
+}
+
+.author {
+  font: font(1.6, small, light);
 }

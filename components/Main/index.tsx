@@ -1,22 +1,21 @@
 'use client'
 
-import { AnimatePresence, motion } from 'framer-motion'
 import { CardKeys, CardType } from '@/app/page'
+import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
-import Card from '../Card'
-import { CardProps } from '../Card/types'
-import { Grid } from 'react-feather'
+import neoskopLogo from '@/assets/neoskop-logo.svg'
 import Header from '@/components/Header'
+import { capitalizeFirstLetter } from '@/helper/capitalizeFirstLetter'
+import { fade } from '@/lib/animations/fade'
 import Image from 'next/image'
-import { MainProps } from './types'
+import { Grid } from 'react-feather'
+import Card from '../Card'
 import Overview from '../Overview'
 import Pile from '../Pile'
 import Search from '../Search'
-import clsx from 'clsx'
-import { fade } from '@/lib/animations/fade'
-import neoskopLogo from '@/assets/neoskop-logo.svg'
 import styles from './styles.module.scss'
+import { MainProps } from './types'
 
 const Main = ({ cards, categories, assetUrl }: MainProps) => {
   const [showOverview, setShowOverview] = useState(false)
@@ -30,11 +29,12 @@ const Main = ({ cards, categories, assetUrl }: MainProps) => {
   }
 
   const searchCards = (term: string) => {
+    !showOverview && setShowOverview(true)
     setSearchTerm(term)
   }
 
   const openCard = (id: number) => {
-    setDefaultIndex(id)
+    setDefaultIndex(id - 1)
     setShowOverview(false)
   }
 
@@ -45,9 +45,15 @@ const Main = ({ cards, categories, assetUrl }: MainProps) => {
   }
 
   const filterCards = (searchTerm: string) => {
-    const catalog: Record<CardKeys, any>[] = cards.filter(card =>
-      card.Titel.match(searchTerm)
-    )
+    const catalog: Record<CardKeys, any>[] = cards.filter(card => {
+      if (card.Titel?.match(capitalizeFirstLetter(searchTerm))) {
+        return true
+      } else if (card.Beschreibung?.match(capitalizeFirstLetter(searchTerm))) {
+        return true
+      } else {
+        return false
+      }
+    })
 
     setFilteredCards(catalog)
   }
@@ -64,39 +70,38 @@ const Main = ({ cards, categories, assetUrl }: MainProps) => {
   const overviewItems = filteredCards.map((card, i) => (
     <Card
       key={card.Titel}
-      id={i}
+      id={card.id}
       color={findCategory(card.Kategorie).Farbe}
       title={card.Titel}
       description={card.Beschreibung}
       category={findCategory(card.Kategorie).Name}
       visual={`${assetUrl}/assets/${card.Icon}`}
+      author={card.Autor}
+      authorPosition={card.Autor_Position}
       openCard={openCard}
-      compact
+      template="compact"
     />
   ))
 
   const pileItems = cards.map((card, i) => (
     <Card
       key={card.Titel}
-      id={i}
+      id={card.id}
       color={findCategory(card.Kategorie).Farbe}
       title={card.Titel}
       description={card.Beschreibung}
       category={findCategory(card.Kategorie).Name}
+      author={card.Autor}
+      authorPosition={card.Autor_Position}
       visual={`${assetUrl}/assets/${card.Icon}`}
+      template={card.Kategorie === 3 ? 'quote' : 'default'}
     />
   ))
 
   return (
     <main className={styles.main}>
       <Header>
-        <AnimatePresence>
-          {showOverview && (
-            <motion.div {...fade}>
-              <Search search={searchCards} />
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <Search search={searchCards} />
         <button onClick={handleOverview}>
           <Grid size={24} color="black" />
         </button>
