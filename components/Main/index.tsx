@@ -76,7 +76,7 @@ const Main = ({ cards, categories, assetUrl }: MainProps) => {
       color={findCategory(card.Kategorie)?.Farbe}
       title={card.Titel}
       description={card.Beschreibung}
-      category={findCategory(card.Kategorie).Name}
+      category={findCategory(card.Kategorie)?.Name}
       visual={`${assetUrl}/assets/${card.Icon}`}
       author={card.Autor}
       authorPosition={card.Autor_Position}
@@ -92,7 +92,7 @@ const Main = ({ cards, categories, assetUrl }: MainProps) => {
       color={findCategory(card.Kategorie)?.Farbe}
       title={card.Titel}
       description={card.Beschreibung}
-      category={findCategory(card.Kategorie).Name}
+      category={findCategory(card.Kategorie)?.Name}
       author={card.Autor}
       authorPosition={card.Autor_Position}
       visual={`${assetUrl}/assets/${card.Icon}`}
